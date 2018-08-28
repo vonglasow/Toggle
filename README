@@ -4,11 +4,12 @@ In this version, the script can toggle:
     true     <->     false
     on       <->     off
     yes      <->     no
-    define  <->     undef
+    define   <->     undef
     +        <->     -
     >        <->     <
-    &&    <->     ||
-    &     <->      |
+    &&       <->     ||
+    &        <->     |
+    TODO     <->     DONE
     positive and negative numbers
 
 Move the cursor on the word/char/number to be toggled and press

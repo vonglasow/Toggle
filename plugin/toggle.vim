@@ -20,6 +20,7 @@
 "  define   <->     undef
 "  ||       <->     &&
 "  &&       <->     ||
+"  TODO     <->     DONE
 "
 "  If cursor is positioned on a number, the function looks for a + 
 "  or - sign in front of that number and toggels it. If the number
@@ -166,7 +167,7 @@ function! Toggle() "{{{
             endif
         endif " is a number under the cursor?
     endif " toggleDone?}}}
-    
+
     " 3. Check if cursor is on one-or two-character symbol"{{{
     if s:toggleDone == 0
       let s:nextChar = strpart(s:cline, s:columnNo, 1)
@@ -201,7 +202,7 @@ function! Toggle() "{{{
     " 4. Check if complete word can be toggled {{{
     if (s:toggleDone == 0)
         let s:wordUnderCursor_tmp = ''
-"                 
+
         let s:wordUnderCursor = expand("<cword>")
         if (s:wordUnderCursor ==? "true")
             let s:wordUnderCursor_tmp = "false"
@@ -228,6 +229,12 @@ function! Toggle() "{{{
             let s:toggleDone = 1
         elseif (s:wordUnderCursor ==? "undef")
             let s:wordUnderCursor_tmp = "define"
+            let s:toggleDone = 1
+        elseif (s:wordUnderCursor ==? "TODO")
+            let s:wordUnderCursor_tmp = "DONE"
+            let s:toggleDone = 1
+        elseif (s:wordUnderCursor ==? "DONE")
+            let s:wordUnderCursor_tmp = "TODO"
             let s:toggleDone = 1
         endif
 
@@ -262,7 +269,7 @@ function! Toggle() "{{{
     unlet! s:cline
     unlet! s:foundSpace
     unlet! s:cuc "}}}
-    
+
     "restore saved values
     call cursor(s:lineNo,s:columnNo)
     unlet s:lineNo
